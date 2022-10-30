@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "redrover"
+version = "0.1.0"
+description = "five thread"
+authors = ["Wis13 <vkqa@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flake8 = "^5.0.4"
+pytest = "^7.2.0"
+black = "^22.10.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
