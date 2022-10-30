@@ -1,10 +1,10 @@
 name: Saucedemo_05
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: pull_request
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
 
 jobs:
   build:
@@ -53,7 +53,7 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --maxline-length=127 --stastistics
 
-    - name Run tests
+    - name: Run tests
       run: |
         source .venv/bin/activate
         pytest tests/
