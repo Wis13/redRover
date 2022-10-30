@@ -54,7 +54,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --maxline-length=127 --stastistics
 
     - name Run tests
-      run:
+      run: |
         source .venv/bin/activate
         pytest tests/
         coverage report
