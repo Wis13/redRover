@@ -1,5 +1,6 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from config.TestData import TestData as TD
@@ -12,8 +13,8 @@ def init_driver_chrome():
 
     options = webdriver.ChromeOptions()
     options.add_argument("--window-size=1600,1080")
-    options.headless = False
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    options.headless = True
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     return driver
 
@@ -23,8 +24,8 @@ def init_driver_firefox():
     options = webdriver.FirefoxOptions()
     options.add_argument("--width=1600")
     options.add_argument("--height=1080")
-    options.headless = False
-    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
+    options.headless = True
+    driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options)
 
     return driver
 
