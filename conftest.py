@@ -13,7 +13,7 @@ def init_driver_chrome():
 
     options = webdriver.ChromeOptions()
     options.add_argument("--window-size=1600,1080")
-    options.headless = True
+    options.headless = False
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     return driver
@@ -24,7 +24,7 @@ def init_driver_firefox():
     options = webdriver.FirefoxOptions()
     options.add_argument("--width=1600")
     options.add_argument("--height=1080")
-    options.headless = True
+    options.headless = False
     driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options)
 
     return driver
@@ -41,10 +41,10 @@ def init_driver(request):
         raise Exception('driver is not found')
 
     driver.get(TD.BASE_URL)
-    if driver.title == "Swag Labs":
-        WebDriverWait(driver, 90).until(ec.presence_of_element_located((By.ID, 'user-name'))).send_keys(TD.LOGIN)
-        driver.find_element(By.ID, 'password').send_keys(TD.PASSWORD)
-        driver.find_element(By.ID, 'login-button').click()
+    # if driver.title == "Swag Labs":
+        # WebDriverWait(driver, 90).until(ec.presence_of_element_located((By.ID, 'user-name'))).send_keys(TD.LOGIN)
+        # driver.find_element(By.ID, 'password').send_keys(TD.PASSWORD)
+        # driver.find_element(By.ID, 'login-button').click()
     request.cls.driver = driver
     yield driver
 
