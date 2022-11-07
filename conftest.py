@@ -13,7 +13,7 @@ def init_driver_chrome():
 
     options = webdriver.ChromeOptions()
     options.add_argument("--window-size=1600,1080")
-    options.headless = False
+    options.headless = True
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     return driver
@@ -24,7 +24,7 @@ def init_driver_firefox():
     options = webdriver.FirefoxOptions()
     options.add_argument("--width=1600")
     options.add_argument("--height=1080")
-    options.headless = False
+    options.headless = True
     driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options)
 
     return driver
