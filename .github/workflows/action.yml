@@ -39,47 +39,16 @@ jobs:
 
       - name: Install poetry dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root
+        run: |
+          pip install --upgrade pip
+          poetry install --no-interaction --no-root
 
       - name: Lint with flake8
         run: |
-          pip install --upgrade pip
-          pip install flake8
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-          inputs:
-            path: # id
-              description: "Path to source file or directory (default='.')"
-              required: false
-              default: "." # default path is the root of the source repository
-            update-pip: # id
-              description: "Boolean for pip upgrade prior to flake8 installation (default='false')"
-              required: false
-              default: "false" # options "true", "false"
-            ignore:
-              description: "Comma delimited list of ignored flake8 rule codes (optional)"
-              required: false
-              default: "none" # comma delimited list of ignored rule codes
-            exclude:
-              description: "Comma delimited list of excluded paths (optional)"
-              required: false
-              default: "none" # comma delimited list of paths
-            max-line-length:
-              description: "Integer value representing max acceptable line length (optional)"
-              required: false
-              default: "none" # integer value as a string
-            args:
-              description: "flake8 arguments for test execution (optional)"
-              required: false
-              default: "none" # integer value as a string
-            flake8-version:
-              description: "The flake8 version for tests (optional, default='latest')"
-              required: false
-              default: "latest" # possible values ['latest', 'master', 'main', '[VERSION NUMBER]']
-            plugins:
-              description: "List of flake8 plugins for pip installation prior to flake8 execution"
-              required: false
-              default: "none" # possible values ['[PACKAGE]', '[PACKAGE]==[VERSION NUMBER]']
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 ./tests --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 ./tests --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Run tests
         run:
