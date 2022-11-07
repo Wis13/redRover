@@ -1,6 +1,4 @@
-from Pages import BasePage
 from Pages.MainPage import MainPage, MainPageLocators
-from selenium import webdriver
 
 
 class TestMainPage:

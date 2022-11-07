@@ -41,10 +41,10 @@ def init_driver(request):
         raise Exception('driver is not found')
 
     driver.get(TD.BASE_URL)
-    # if driver.title == "Swag Labs":
-        # WebDriverWait(driver, 90).until(ec.presence_of_element_located((By.ID, 'user-name'))).send_keys(TD.LOGIN)
-        # driver.find_element(By.ID, 'password').send_keys(TD.PASSWORD)
-        # driver.find_element(By.ID, 'login-button').click()
+    if driver.title == "Swag Labs":
+        WebDriverWait(driver, 90).until(ec.presence_of_element_located((By.ID, 'user-name'))).send_keys(TD.LOGIN)
+        driver.find_element(By.ID, 'password').send_keys(TD.PASSWORD)
+        driver.find_element(By.ID, 'login-button').click()
     request.cls.driver = driver
     yield driver
 
